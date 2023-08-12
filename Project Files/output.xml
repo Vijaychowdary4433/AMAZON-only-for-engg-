@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 3.2.2 (Python 3.8.1 on win32)" generated="20201004 17:19:12.094" rpa="false">
+<suite id="s1" name="AmazonDB" source="C:\Users\krish\PycharmProjects\robottestautomation\SampleDataBase\AmazonDB.robot">
+<kw name="Connect To DB" type="setup">
+<arguments>
+<arg>${con}</arg>
+</arguments>
+<kw name="Set Global Variable" library="BuiltIn">
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<arguments>
+<arg>${DB_CONNECT_STRING_VALUE}</arg>
+</arguments>
+<msg timestamp="20201004 17:19:12.137" level="INFO">${DB_CONNECT_STRING_VALUE} = 'system/Anjalikrishna1@(DESCRIPTION =(ADDRESS_LIST =(ADDRESS = (PROTOCOL = IPC)(KEY = EXTPROC1521)))(CONNECT_DATA =(SID = orcl)(PRESENTATION = RO)))'</msg>
+<status status="PASS" starttime="20201004 17:19:12.136" endtime="20201004 17:19:12.137"></status>
+</kw>
+<kw name="Connect To Database Using Custom Params" library="DatabaseLibrary">
+<doc>Loads the DB API 2.0 module given `dbapiModuleName` then uses it to
+connect to the database using the map string `db_custom_param_string`.</doc>
+<arguments>
+<arg>cx_Oracle</arg>
+<arg>${DB_CONNECT_STRING_VALUE}</arg>
+</arguments>
+<msg timestamp="20201004 17:19:12.140" level="INFO">Executing : Connect To Database Using Custom Params : cx_Oracle.connect(db_api_2.connect('system/Anjalikrishna1@(DESCRIPTION =(ADDRESS_LIST =(ADDRESS = (PROTOCOL = IPC)(KEY = EXTPROC1521)))(CONNECT_DATA =(SID = orcl)(PRESENTATION = RO)))')) </msg>
+<status status="PASS" starttime="20201004 17:19:12.137" endtime="20201004 17:19:12.271"></status>
+</kw>
+<status status="PASS" starttime="20201004 17:19:12.136" endtime="20201004 17:19:12.271"></status>
+</kw>
+<test id="s1-t1" name="Test case Validate email">
+<kw name="Row Count Is 0" library="DatabaseLibrary">
+<doc>Check if any rows are returned from the submitted `selectStatement`. If there are, then this will throw an
+AssertionError. Set optional input `sansTran` to True to run command without an explicit transaction commit or
+rollback.</doc>
+<arguments>
+<arg>select * from AMAZON_CUSTOMERS where EMAIL not like '__%@__%.__%'</arg>
+</arguments>
+<assign>
+<var>${data}</var>
+</assign>
+<msg timestamp="20201004 17:19:12.272" level="INFO">Executing : Row Count Is 0  |  select * from AMAZON_CUSTOMERS where EMAIL not like '__%@__%.__%' </msg>
+<msg timestamp="20201004 17:19:12.272" level="INFO">Executing : Row Count  |  select * from AMAZON_CUSTOMERS where EMAIL not like '__%@__%.__%' </msg>
+<msg timestamp="20201004 17:19:12.273" level="FAIL">Expected zero rows to be returned from 'select * from AMAZON_CUSTOMERS where EMAIL not like '__%@__%.__%'' but got rows back. Number of rows returned was 1</msg>
+<status status="FAIL" starttime="20201004 17:19:12.271" endtime="20201004 17:19:12.273"></status>
+</kw>
+<doc>To validate email address field in customer table</doc>
+<tags>
+<tag>email validation</tag>
+</tags>
+<status status="FAIL" starttime="20201004 17:19:12.271" endtime="20201004 17:19:12.274" critical="yes">Expected zero rows to be returned from 'select * from AMAZON_CUSTOMERS where EMAIL not like '__%@__%.__%'' but got rows back. Number of rows returned was 1</status>
+</test>
+<test id="s1-t2" name="Test case Validate order for invalid customer">
+<kw name="Row Count Is 0" library="DatabaseLibrary">
+<doc>Check if any rows are returned from the submitted `selectStatement`. If there are, then this will throw an
+AssertionError. Set optional input `sansTran` to True to run command without an explicit transaction commit or
+rollback.</doc>
+<arguments>
+<arg>select * from amazon_order where PRODID not in (select prodid from product)</arg>
+</arguments>
+<assign>
+<var>${data}</var>
+</assign>
+<msg timestamp="20201004 17:19:12.276" level="INFO">Executing : Row Count Is 0  |  select * from amazon_order where PRODID not in (select prodid from product) </msg>
+<msg timestamp="20201004 17:19:12.276" level="INFO">Executing : Row Count  |  select * from amazon_order where PRODID not in (select prodid from product) </msg>
+<msg timestamp="20201004 17:19:12.278" level="INFO">${data} = None</msg>
+<status status="PASS" starttime="20201004 17:19:12.276" endtime="20201004 17:19:12.278"></status>
+</kw>
+<doc>To validate order table does not contain invalid orders from not registerd customer for non existing product.</doc>
+<tags>
+<tag>validate order</tag>
+</tags>
+<status status="PASS" starttime="20201004 17:19:12.275" endtime="20201004 17:19:12.279" critical="yes"></status>
+</test>
+<test id="s1-t3" name="Test case Validate order for invalid product">
+<kw name="Row Count Is 0" library="DatabaseLibrary">
+<doc>Check if any rows are returned from the submitted `selectStatement`. If there are, then this will throw an
+AssertionError. Set optional input `sansTran` to True to run command without an explicit transaction commit or
+rollback.</doc>
+<arguments>
+<arg>select * from amazon_order where customer_id not in (select customer_id from amazon_customers)</arg>
+</arguments>
+<assign>
+<var>${data}</var>
+</assign>
+<msg timestamp="20201004 17:19:12.281" level="INFO">Executing : Row Count Is 0  |  select * from amazon_order where customer_id not in (select customer_id from amazon_customers) </msg>
+<msg timestamp="20201004 17:19:12.281" level="INFO">Executing : Row Count  |  select * from amazon_order where customer_id not in (select customer_id from amazon_customers) </msg>
+<msg timestamp="20201004 17:19:12.282" level="INFO">${data} = None</msg>
+<status status="PASS" starttime="20201004 17:19:12.280" endtime="20201004 17:19:12.282"></status>
+</kw>
+<doc>To validate order table does not contain invalid orders for non existing product.</doc>
+<tags>
+<tag>validate order</tag>
+</tags>
+<status status="PASS" starttime="20201004 17:19:12.280" endtime="20201004 17:19:12.282" critical="yes"></status>
+</test>
+<kw name="Disconnect From Database" library="DatabaseLibrary" type="teardown">
+<doc>Disconnects from the database.</doc>
+<msg timestamp="20201004 17:19:12.284" level="INFO">Executing : Disconnect From Database</msg>
+<status status="PASS" starttime="20201004 17:19:12.283" endtime="20201004 17:19:12.284"></status>
+</kw>
+<status status="FAIL" starttime="20201004 17:19:12.095" endtime="20201004 17:19:12.284"></status>
+</suite>
+<statistics>
+<total>
+<stat pass="2" fail="1">Critical Tests</stat>
+<stat pass="2" fail="1">All Tests</stat>
+</total>
+<tag>
+<stat pass="0" fail="1">email validation</stat>
+<stat pass="2" fail="0">validate order</stat>
+</tag>
+<suite>
+<stat pass="2" fail="1" id="s1" name="AmazonDB">AmazonDB</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
