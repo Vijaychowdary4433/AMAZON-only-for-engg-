@@ -9,7 +9,7 @@ Resource    ../Resources/amazon_datareader.robot
 
 *** Variables ***
 &{proddata}     searchitem=iphone   expected=iphone
-${filepath}    C:\\Users\\krish\\PycharmProjects\\robottestautomation\\DATAS\\csvdata.csv
+${filepath}    C:\\Users\\teja\\PycharmProjects\\robottestautomation\\DATAS\\csvdata.csv
 *** Test Cases ***
 amzon invalid product search
     [Tags]    Functional
