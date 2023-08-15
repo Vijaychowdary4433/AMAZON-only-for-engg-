@@ -1,25 +1,17 @@
-*** Settings ***
-Resource    ../Resources/amazon.robot
-Resource    ../Resources/common.robot
-Library    Dialogs
-Library    OperatingSystem
-Test Setup    common.start browser
-Test Teardown  common.exit browser
-Resource    ../Resources/amazon_datareader.robot
+import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 
-*** Variables ***
-&{proddata}     searchitem=iphone   expected=iphone
-${filepath}    C:\\Users\\teja\\PycharmProjects\\robottestautomation\\DATAS\\csvdata.csv
-*** Test Cases ***
-amzon invalid product search
-    [Tags]    Functional
-    [Documentation]    test to product search for invalid products
-    &{proddata}=    create dictionary    searchitem=fffffffffffffffffffffff   expected=No results for fffffffffffffffffffffff
-    amazon search   &{proddata}
-amzon valid product search
-    [Tags]    Functinal Smoke
-    [Documentation]    test to product search for valid products
-    amazon search   &{proddata}
-amazon test count of displayed product
-    [Documentation]    to check whether the total number of item displayed on page is equal to the mentioned number
-    amazon.amazon product count     oneplus    xpath://img[@data-image-latency='s-product-image']  20
+// Open Browser and Navigate to Amazon
+WebUI.openBrowser('')
+WebUI.navigateToUrl('https://www.amazon.com/')
+
+// Enter Search Query
+WebUI.setText(findTestObject('Page_Amazon Home/input_twotabsearchtextbox'), 'Laptop')
+
+// Submit Search
+WebUI.click(findTestObject('Page_Amazon Home/input.nav-input'))
+
+// Verify Search Results
+WebUI.verifyElementPresent(findTestObject('Page_Search Results/div_s-search-results'))
+
+// Close Browser
+WebUI.closeBrowser()
