@@ -1,0 +1,33 @@
+WebUI.openBrowser('')
+
+
+
+WebUI.navigateToUrl('https://www.amazon.com/')
+
+
+
+WebUI.click(findTestObject('Object Repository/FaceBookPages/FaceBook_Login_OR/Page_Amazon.com. Spend less. Smile more/span_Sign in'))
+
+
+
+WebUI.setText(findTestObject('Object Repository/FaceBookPages/FaceBook_Login_OR/Page_Amazon Sign-In/input_Email or mobile phone number_email'), 
+
+    '9912667488')
+
+
+
+WebUI.click(findTestObject('Object Repository/FaceBookPages/FaceBook_Login_OR/Page_Amazon Sign-In/input_Enter your email or mobile phone numb_fc7402'))
+
+
+
+WebUI.setEncryptedText(findTestObject('Object Repository/FaceBookPages/FaceBook_Login_OR/Page_Amazon Sign-In/input_Forgot your password_password'), 
+
+    '61KXoQNe1I2yVQJKbAvjIA==')
+
+
+
+WebUI.click(findTestObject('Object Repository/FaceBookPages/FaceBook_Login_OR/Page_Amazon Sign-In/input_Enter your password_signInSubmit'))
+
+
+
+WebUI.closeBrowser()
