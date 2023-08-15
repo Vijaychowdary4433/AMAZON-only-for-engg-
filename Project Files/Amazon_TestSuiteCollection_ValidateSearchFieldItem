@@ -1,0 +1,26 @@
+WebUI.openBrowser('')
+
+
+WebUI.navigateToUrl('')
+
+
+WebUI.click(findTestObject(''))
+
+
+unchecked = WebUI.verifyElementNotChecked(findTestObject(''),0)
+
+if (unchecked == true) {
+
+    System.out.println('element not checkeck')
+
+
+    WebUI.check(findTestObject(''))
+
+
+    System.out.println('element checkeck')
+
+}
+
+WebUI.delay(3)
+
+WebUI.verifyElementChecked(findTestObject(''), 0)
