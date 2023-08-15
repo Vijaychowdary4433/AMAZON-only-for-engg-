@@ -9,9 +9,9 @@ Resource    ../Resources/amazon_datareader.robot
 
 *** Variables ***
 &{proddata}     searchitem=iphone   expected=iphone
-&{credential}   email=anjali_am@outlook.com  password=testpassword
-${filepath}    C:\\Users\\krish\\PycharmProjects\\robottestautomation\\DATAS\\csvdata.csv
-${filepathprod}  C:\\Users\\krish\\PycharmProjects\\robottestautomation\\DATAS\\product.csv
+&{credential}   email= nagateja@gmail.com password=testpassword
+${filepath}    C:\\Users\\teja\\PycharmProjects\\robottestautomation\\DATAS\\csvdata.csv
+${filepathprod}  C:\\Users\\teja\\PycharmProjects\\robottestautomation\\DATAS\\product.csv
 *** Test Cases ***
 amazon login invalid scenarios
     [Tags]  Negative
