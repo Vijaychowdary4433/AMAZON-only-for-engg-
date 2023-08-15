@@ -5,7 +5,7 @@ Suite Setup    Connect To DB    ${con}
 Suite Teardown  disconnect from database
 *** Variables ***
 
-${con}    'system/Anjalikrishna1@(DESCRIPTION =(ADDRESS_LIST =(ADDRESS = (PROTOCOL = IPC)(KEY = EXTPROC1521)))(CONNECT_DATA =(SID = orcl)(PRESENTATION = RO)))'
+${con}    'system/NagaTeja1@(DESCRIPTION =(ADDRESS_LIST =(ADDRESS = (PROTOCOL = IPC)(KEY = EXTPROC1521)))(CONNECT_DATA =(SID = orcl)(PRESENTATION = RO)))'
 
 *** Test Cases ***
 Test case Validate email
