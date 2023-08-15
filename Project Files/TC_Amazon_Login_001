@@ -1,28 +1,24 @@
-*** Settings ***
-Resource    ../Resources/amazon.robot
-Resource    ../Resources/common.robot
-Library    Dialogs
-Library    OperatingSystem
-Test Setup    common.start browser
-Test Teardown  common.exit browser
-Resource    ../Resources/amazon_datareader.robot
+import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 
-*** Variables ***
-&{proddata}     searchitem=iphone   expected=iphone
-&{credential}   email= nagateja@gmail.com password=testpassword
-${filepath}    C:\\Users\\teja\\PycharmProjects\\robottestautomation\\DATAS\\csvdata.csv
-${filepathprod}  C:\\Users\\teja\\PycharmProjects\\robottestautomation\\DATAS\\product.csv
-*** Test Cases ***
-amazon login invalid scenarios
-    [Tags]  Negative
-    [Documentation]    to test  invalid login scenarios with data driven
-    @{csvdata}=    amazon_datareader.Get csv data    ${filepath}
-    FOR    ${val}    IN    @{csvdata}
-        log to console    ${val}
-        amzon login csv    @{val}
-    END
-amzon login scenarios
-    [Tags]    Positive
-    [Documentation]    to test  valid login scenarios
-    [Template]    amazon login
-    &{credential}
+// Open Browser and Navigate to Amazon
+WebUI.openBrowser('')
+WebUI.navigateToUrl('https://www.amazon.com/')
+
+// Click Sign In
+WebUI.click(findTestObject('Page_Amazon Home/a_Sign In'))
+
+// Enter Login Credentials and Sign In
+WebUI.setText(findTestObject('Page_Sign-In/input_email'), 'your_email@example.com')
+WebUI.setText(findTestObject('Page_Sign-In/input_password'), 'your_password')
+WebUI.click(findTestObject('Page_Sign-In/input_continue'))
+WebUI.click(findTestObject('Page_Sign-In/input_signinSubmit'))
+
+// Verify Successful Login
+WebUI.verifyElementPresent(findTestObject('Page_Amazon Home/span_Hello, YourName'))
+
+// Log out (Optional)
+WebUI.click(findTestObject('Page_Amazon Home/span_Hello, YourName'))
+WebUI.click(findTestObject('Page_Sign Out/span_Sign Out'))
+
+// Close Browser
+WebUI.closeBrowser()
