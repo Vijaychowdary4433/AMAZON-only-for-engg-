@@ -1,0 +1,22 @@
+import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
+
+// Open Browser and Navigate to Amazon
+WebUI.openBrowser('')
+WebUI.navigateToUrl('https://www.amazon.com/')
+
+// Search for a Product
+WebUI.setText(findTestObject('Page_Amazon Home/input_twotabsearchtextbox'), 'Laptop')
+WebUI.click(findTestObject('Page_Amazon Home/input.nav-input'))
+
+// Click on a Product
+WebUI.click(findTestObject('Page_Search Results/span_Dell XPS 13'))
+
+// Add Product to Cart
+WebUI.click(findTestObject('Page_Product Details/button_add-to-cart-button'))
+
+// Verify Cart Contents
+WebUI.verifyElementPresent(findTestObject('Page_Shopping Cart/span_1 item added to Cart'))
+
+// Checkout Process
+WebUI.click(findTestObject('Page_Shopping Cart/a_Checkout'))
+WebUI.verifyElementPresent(findTestObject('Page_Sign-In/h1_Sign-In'))
